@@ -1,15 +1,17 @@
+# Use the OpenJDK 17 base image
 FROM openjdk:17-bullseye
 
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the compiled jar (update with actual jar name)
-COPY build/libs/customerapp.jar app.jar
+# Copy the compiled JAR file into the container and rename it to app.jar
+COPY build/libs/*.jar app.jar
 
-# Copy the start script
-COPY start.sh start.sh
+# Copy the start script into the container
+COPY start.sh .
 
-# Make the script executable
-RUN chmod +x start.sh
+# Make the start script executable
+RUN chmod 770 start.sh
 
-# Set the start command
+# Set the start script as the container's entrypoint
 CMD ["./start.sh"]
